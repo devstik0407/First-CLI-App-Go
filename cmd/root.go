@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"log"
 	"os"
 
 	"github.com/spf13/cobra"
@@ -16,6 +17,18 @@ Save it in any folder of you wish`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("Yes I am here")
 	},
+}
+
+func init() {
+	rootCmd.AddCommand(downloadCmd)
+	downloadCmd.Flags().StringVarP(&Source, "source", "s", "", "source URL to download from")
+
+	wd, err := os.Getwd()
+	if err != nil {
+		log.Fatal(err)
+	}
+	downloadCmd.Flags().StringVarP(&Dest, "destination", "d", wd, "directory to save the file")
+	downloadCmd.MarkFlagRequired("source")
 }
 
 func Execute() {
