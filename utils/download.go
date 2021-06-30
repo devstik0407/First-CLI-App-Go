@@ -37,6 +37,9 @@ func DownloadAndSave(src, dest string) (string, error) {
 		fmt.Println("Enter a name (without extension) for the file:")
 		newName := ""
 		fmt.Scanln(&newName)
+		if newName == "" {
+			newName = "untitled"
+		}
 		fileName = newName + "." + ext
 		_, err = os.Stat(fileName)
 	}
