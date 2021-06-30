@@ -31,7 +31,7 @@ func DownloadAndSave(src, dest string) (string, error) {
 	}
 	ext := fileNameSplit[1]
 
-	_, err = os.Stat(fileName)
+	_, err = os.Stat(filepath.Join(dest, fileName))
 	for !os.IsNotExist(err) {
 		fmt.Printf("A file with same name %s already exists in the directory", fileName)
 		fmt.Println("Enter a name (without extension) for the file:")
